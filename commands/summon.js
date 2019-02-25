@@ -55,6 +55,13 @@ class Summon {
       }
       return msg + heroes.join('\n')
     }
+    if (this.count === '30') {
+      let x = 30
+      for (let i = 0; i < x; i++) {
+        heroes.push(`${i + 1}) ${Summon.getHero(this.option)}`)
+      }
+      return msg + heroes.join('\n')
+    }
     if (this.count.toUpperCase() === 'ATLANTIS') { // Check if the first parameter passed is actually the summon type (for a single Atlantis pull).
       heroes.push(Summon.getHero('ATLANTIS'))
       return msg + heroes
