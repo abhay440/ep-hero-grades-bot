@@ -99,7 +99,10 @@ module.exports = {
     'Inari',
   ],
   'Featured Legendary': [
-    'FEATURED HERO'
+    'HOTM-1',
+    'HOTM-2',
+    'ATLANTIS-1',
+    'ATLANTIS-2'
   ]
 }
 
