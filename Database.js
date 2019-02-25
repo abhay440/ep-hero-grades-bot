@@ -11,21 +11,29 @@ function getHeroData(hero, record, message) {
   const data = {};
   data.heroName = hero
   data.overallGrade = record.get('Overall')
-  data.oTitan = record.get('Overall Titan')[0]
-  data.oDefense = record.get('Overall Defense')[0]
-  data.oOffense = record.get('Overall Offense')[0]
-  data.element = record.get('Element')[0]
-  data.class = record.get('Class')[0]
+
+  data.oTitan = record.get('Overall Titan')
+  data.oDefense = record.get('Overall Defense')
+  data.oOffense = record.get('Overall Offense')
+  data.element = record.get('Element')
+  data.class = record.get('Class')
   data.family = record.get('Family')
   data.stars = record.get('Stars')[0]
-  data.power = record.get('Power')[0]
-  data.attack = record.get('Attack')[0]
-  data.defense = record.get('Defense')[0]
-  data.health = record.get('Health')[0]
-  data.special = record.get('Special')[0]
-  data.specialName = record.get('Special Name')[0]
-  data.mana = record.get('Mana')[0]
-  data.limited = record.get('Limited')[0] === 'TRUE' ? 'Yes' : 'No'
+  
+  //data.power = record.get('Power')[0]
+  
+  data.attack = record.get('Attack')
+  data.defense = record.get('Defense')
+  data.health = record.get('Health')
+
+  data.special = record.get('Special')
+  
+  //data.specialName = record.get('Special Name')[0]
+  
+  data.mana = record.get('Mana')
+  
+  //data.limited = record.get('Limited')[0] === 'TRUE' ? 'Yes' : 'No'
+
   return Logger.success['info'](message, data)
 }
 
