@@ -103,6 +103,15 @@ module.exports = {
     'HOTM-2',
     'ATLANTIS-1',
     'ATLANTIS-2'
+  ],
+  'Epic Grimforest': [
+    'Gretel',
+    'Hansel'
+  ],
+  'Legendary Grimforest': [
+    'Boss Wolf',
+    'Red Hood',
+    'Rumpelstiltskin '
   ]
 }
 

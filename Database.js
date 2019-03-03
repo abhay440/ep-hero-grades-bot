@@ -18,9 +18,9 @@ function getHeroData(hero, record, message) {
   data.element = record.get('Element')
   data.class = record.get('Class')
   data.family = record.get('Family')
-  data.stars = record.get('Stars')[0]
+  data.stars = record.get('Stars')
   
-  //data.power = record.get('Power')[0]
+  //data.power = record.get('Power')
   
   data.attack = record.get('Attack')
   data.defense = record.get('Defense')
