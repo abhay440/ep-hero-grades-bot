@@ -45,7 +45,7 @@ module.exports = {
 
 			var parsedText = await ocr();
 			if (parsedText && parsedText !== false && parsedText.length > 0) {
-				log(`OCR Result: ${parsedText}`);
+				//log(`OCR Result: ${parsedText}`);
 				var chartUrl = await sendToGoogleSheets(parsedText, alliance, stars, titan);
 				log("chartUrl: " + chartUrl);
 
@@ -99,6 +99,8 @@ module.exports = {
     				reject("Invalid Alliance");
     				return;
     			}
+
+                chartUrl = chartUrl + "&time=" + Math.floor(Date.now() / 1000);
 
 				//var url = 'https://script.google.com/macros/s/AKfycbzCKDrvrdm_IRZdZTtDkLeGCMkohZS9OEW0EDQHPuoR-VEz4yA/exec'; //panda
 				//var url = 'https://script.google.com/macros/s/AKfycbxvpByOGedpNy8zjBWnLYaH8_q3ik-z2yifgLPD/exec'; //cub
