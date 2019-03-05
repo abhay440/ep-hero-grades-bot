@@ -38,7 +38,7 @@ module.exports = {
 	    trackData(message);
 
 	    async function trackData(message) {
-			await compressImage(message);
+			await compressImage(message.attachments.first().url, message.channel.name + '.jpg');
 			log("Compressed");
 			await sleep(1000)
 			log("Processing");
@@ -49,11 +49,12 @@ module.exports = {
 				var chartUrl = await sendToGoogleSheets(parsedText, alliance, stars, titan);
 				log("chartUrl: " + chartUrl);
 
-				message.channel.send({embed: {
-				  title: "Summary",
-				  description: "",
-				  image: {url: chartUrl}
-				}});
+                await compressImage(chartUrl, "chart.jpg");
+                await sleep(1000)
+
+                message.channel.send("Summary!", {
+                    files: ["chart.jpg"]
+                });
 
 			} else {
 				return;
@@ -66,15 +67,15 @@ module.exports = {
 		    });
 		}
 
-    	function compressImage(message) {
+    	function compressImage(imageUrl, filename) {
     		log("Compressing");
 			var Jimp = require('jimp');
 			return new Promise((resolve, reject) => {
-				Jimp.read(message.attachments.first().url)
+				Jimp.read(imageUrl)
 					.then(image => {
 						resolve(
 							image.quality(95)
-								.write(message.channel.name + '.jpg')
+								.write(filename)
 						);
 					})
 					.catch(err => {
@@ -163,21 +164,3 @@ module.exports = {
 
   },
 }
-
-
-
-
-
-
-
-
-/*
-	    var strBuilder = [];
-	    var jsonObj = message.attachments.first();
-	    for(key in jsonObj){
-	      if (jsonObj.hasOwnProperty(key)) {
-	         strBuilder.push("Key is " + key + ", value is " + jsonObj[key] + "\n");
-	      }
-	    }
-	    log(`Received file: ${strBuilder}`)
-*/
