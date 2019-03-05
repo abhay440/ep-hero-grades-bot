@@ -52,7 +52,7 @@ module.exports = {
                 await compressImage(chartUrl, "chart.jpg");
                 await sleep(1000)
 
-                message.channel.send("Summary!", {
+                message.channel.send("Summary", {
                     files: ["chart.jpg"]
                 });
 
@@ -134,7 +134,7 @@ module.exports = {
 
 				var url = 'https://api.ocr.space/parse/image';
 				var headers = {
-					'apikey': 'cfb398abd588957',
+					'apikey': process.env.OCRSPACEAPI,
 					'Content-Type': 'application/x-www-form-urlencoded'
 				};
 
