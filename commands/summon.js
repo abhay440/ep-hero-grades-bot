@@ -6,13 +6,46 @@ const chance = new Chance();
 const pullType = {
   CLASSIC: ['Legendary', 'Epic', 'Rare'],
   ATLANTIS: ['Legendary', 'Epic', 'Rare', 'Rare Atlantis', 'Epic Atlantis', 'Legendary Atlantis', 'Featured Legendary'],
-  GRIMFOREST: ['Legendary', 'Epic', 'Rare', 'Epic Grimforest', 'Legendary Grimforest']
+  GRIMFOREST: ['Legendary', 'Epic', 'Rare', 'Epic Grimforest', 'Legendary Grimforest'],
+  PIRATES: ['Legendary', 'Epic', 'Rare', 'Epic Pirates', 'Legendary Pirates'],
+  AVALON: ['Legendary', 'Epic', 'Rare', 'Epic Avalon', 'Legendary Avalon'],
+  GUARDIANS: ['Legendary', 'Epic', 'Rare', 'Epic Guardians', 'Legendary Guardians'],
+  WONDERLAND: ['Legendary', 'Epic', 'Rare', 'Epic Wonderland', 'Legendary Wonderland']
 }
 
 const appearanceRates = {
   CLASSIC: [1.5, 26.5, 72],
   ATLANTIS: [1, 11.9, 21.8, 49.2, 14.6, 0.2, 1.3],
-  GRIMFOREST: [1.5, 20.8, 71, 5.7, 1]
+  GRIMFOREST: [1.5, 20.8, 71, 5.7, 1],
+  PIRATES: [1.5, 20.8, 71, 5.7, 1],
+  AVALON: [1.5, 20.8, 71, 5.7, 1],
+  GUARDIANS: [1.5, 20.8, 71, 5.7, 1],
+  WONDERLAND: [1.5, 20.8, 71, 5.7, 1]
+}
+
+const events = {
+  GRIMFOREST: 'GRIMFOREST',
+  FABLES: 'GRIMFOREST',
+  PIRATES: 'PIRATES',
+  CORELLIA: 'PIRATES',
+  AVALON: 'AVALON',
+  KNIGHTS: 'AVALON',
+  GUARDIANS: 'GUARDIANS',
+  TELTOC: 'GUARDIANS',
+  WONDERLAND: 'WONDERLAND',
+  RIDDLES: 'WONDERLAND',
+  ATLANTIS: 'ATLANTIS',
+  CLASSIC: 'CLASSIC'
+}
+
+const eventTypes = {
+  CLASSIC: 'Epic',
+  ATLANTIS: 'Atlantis',
+  GRIMFOREST: 'Fables of Grimforest',
+  PIRATES: 'Pirates of Corellia',
+  AVALON: 'Knights of Avalon',
+  GUARDIANS: 'Guardians of Teltoc',
+  WONDERLAND: 'Riddles of Wonderland'
 }
 
 /**
@@ -36,7 +69,6 @@ class Summon {
   }
 
   static getHero(opt) {
-    //let option = opt !== 'ATLANTIS' ? 'CLASSIC' : opt
 
     let option = opt
     let r = Summon.rarity(option);
@@ -50,13 +82,28 @@ class Summon {
   }
 
   pull() {
-    const msg = `Here is the result of your summon: \n`
+    var summonOption;
+    if (this.count === '10' || this.count === '30') {
+      summonOption = this.option.toUpperCase();
+    } else {
+      summonOption = this.count.toUpperCase();
+    }
+
+    if (Object.keys(events).indexOf(summonOption) != -1) {
+      summonOption = events[summonOption]
+    }
+
+    if (Object.keys(pullType).indexOf(summonOption) == -1) {
+      summonOption = 'CLASSIC';
+    }
+
+    const msg = `Here is the result of your ${eventTypes[summonOption]} summon: \n`
     const heroes = []
 
     if (this.count === '10') {
       let x = 10
       for (let i = 0; i < x; i++) {
-        heroes.push(`${i + 1}) ${Summon.getHero(this.option)}`)
+        heroes.push(`${i + 1}) ${Summon.getHero(summonOption)}`)
       }
       return msg + heroes.join('\n')
     }
@@ -64,18 +111,12 @@ class Summon {
     if (this.count === '30' && this.option === 'ATLANTIS') {
       let x = 30
       for (let i = 0; i < x; i++) {
-        heroes.push(`${i + 1}) ${Summon.getHero(this.option)}`)
+        heroes.push(`${i + 1}) ${Summon.getHero(summonOption)}`)
       }
       return msg + heroes.join('\n')
     }
 
-    if (this.count.toUpperCase() === 'ATLANTIS' || this.count.toUpperCase() === 'GRIMFOREST') { // Check if the first parameter passed is actually the summon type (for a single Atlantis pull).
-      heroes.push(Summon.getHero(this.count.toUpperCase()))
-      return msg + heroes
-    }
-
-    heroes.push(Summon.getHero('CLASSIC'))
-
+    heroes.push(Summon.getHero(summonOption))
     return msg + heroes
   }
 }

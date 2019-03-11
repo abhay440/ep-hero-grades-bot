@@ -112,6 +112,42 @@ module.exports = {
     'Boss Wolf',
     'Red Hood',
     'Rumpelstiltskin '
+  ],
+  'Epic Pirates': [
+    'Cabin Boy Peters',
+    'First Mate Boomer'
+  ],
+  'Legendary Pirates': [
+    'Kestrel',
+    'Captain Sargasso',
+    'Lady Locke'
+  ],
+  'Epic Avalon': [
+    'Merlin',
+    'Sir Lancelot'
+  ],
+  'Legendary Avalon': [
+    'Morgan Le Fay',
+    'Guinevere',
+    'King Arthur'
+  ],
+  'Epic Guardians': [
+    'Guardian Falcon',
+    'Guardian Jackal'
+  ],
+  'Legendary Guardians': [
+    'Guardian Kong',
+    'Guardian Owl',
+    'Guardian Panther'
+  ],
+  'Epic Wonderland': [
+    'Cheshire Cat',
+    'Captain of Diamonds'
+  ],
+  'Legendary Wonderland': [
+    'Alice',
+    'Hatter',
+    'Queen of Hearts'
   ]
 }
 
