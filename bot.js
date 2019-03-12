@@ -35,7 +35,7 @@ client.on('guildMemberAdd', member => {
 
 client.on('message', message => {
   log(`Received message: ${message}`)
-  if (!message.content.startsWith(prefix) || message.author.bot) {
+  if (!message.content.startsWith(prefix)) {
     log('Invalid content')
     return
   }
