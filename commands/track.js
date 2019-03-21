@@ -50,7 +50,7 @@ module.exports = {
 				log("chartUrl: " + chartUrl);
 
                 await compressImage(chartUrl, "chart.jpg");
-                await sleep(1000)
+                await sleep(2000)
 
                 message.channel.send("Summary", {
                     files: ["chart.jpg"]
