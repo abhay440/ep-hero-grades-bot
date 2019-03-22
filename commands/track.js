@@ -17,13 +17,13 @@ module.exports = {
   	var stars = args[1];
   	var titan = args[2].toLowerCase();
 
-  	if (isNaN(stars) || stars < 1 || stars > 14) {
+  	if (isNaN(stars) || stars < 0 || stars > 14) {
 		log("Invalid stars: " + stars);
 		message.reply("Invalid command. Sample command !track panda 12 nature");
 		return;
   	}
 
-  	if (titan !== 'ice' && titan !== 'nature' && titan !== 'fire' && titan !== 'holy' && titan !== 'dark') {
+  	if (titan !== 'ice' && titan !== 'nature' && titan !== 'fire' && titan !== 'holy' && titan !== 'dark' && titan !== 'aw') {
   		log("Invalid Titan color: " + titan);
   		message.reply("Invalid command. Sample command !track panda 12 nature");
   		return;
