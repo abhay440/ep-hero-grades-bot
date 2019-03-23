@@ -1,7 +1,7 @@
 const {log} = require('./Utils');
 
 const info = function (message, data) {
-  let family = data.family !== undefined ? data.family[0] : "N/A";
+  let family = data.family !== undefined ? data.family : "N/A";
   message.channel.send(
     `Here's some information on ${data.heroName}:
 **Element**: ${data.element}
@@ -10,8 +10,7 @@ const info = function (message, data) {
 **Class**: ${data.class}
 **Atlantis Family**: ${family}
 
-**Power**: ${data.power}  |  **Attack**: ${data.attack}  |  **Defense**: ${data.defense}  |  **Health**: ${data.health}
-**Special Skill**: ${data.specialName}
+**Attack**: ${data.attack}  |  **Defense**: ${data.defense}  |  **Health**: ${data.health}
 **Mana Speed:** ${data.mana}
 ${data.special}
 

@@ -34,6 +34,8 @@ function getHeroData(hero, record, message) {
   
   //data.limited = record.get('Limited')[0] === 'TRUE' ? 'Yes' : 'No'
 
+  data.limited = record.get('Hero Type').toLowerCase() === 'normal' ? 'No' : 'Yes'
+
   return Logger.success['info'](message, data)
 }
 
