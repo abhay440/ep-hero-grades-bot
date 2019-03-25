@@ -1,7 +1,7 @@
 const {log} = require('../Utils');
 
 const data = {
-  fire: '20-4, 19-6, 19-4, 11-6, 6-8',
+  fire: 'S2:3-4, S2:3:8, 20-4, 19-6, 19-4, 11-6, 6-8',
   ice: '8-7',
   nature: '7-5',
   holy: '10-6, 12-9',
