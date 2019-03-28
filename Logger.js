@@ -87,7 +87,7 @@ const error =  function(hero, err, message) {
 
 const noData = function(message, data) {
   console.error(`No record found for ${data}`)
-  message.reply('Uh oh. I can\'t seem to find that hero. If I should know this hero, please let my master <@!342706933389852672> know to add this hero.')
+  message.reply('Uh oh. I can\'t seem to find that hero.')
   .then(() => console.log("Successfully responded to channel with error message"))
   .catch(error => console.error(error.message));
 };
