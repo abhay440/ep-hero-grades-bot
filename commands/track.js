@@ -49,7 +49,7 @@ module.exports = {
 				var chartUrl = await sendToGoogleSheets(parsedText, alliance, stars, titan);
 				log("chartUrl: " + chartUrl);
 
-                await compressImage(chartUrl, "chart.jpg");
+                await saveImage(chartUrl, "chart.jpg");
                 await sleep(2000)
 
                 message.channel.send("Summary", {
@@ -74,8 +74,8 @@ module.exports = {
 				Jimp.read(imageUrl)
 					.then(image => {
 						resolve(
-							image.quality(95)
-								.write(filename)
+							//image.quality(95).write(filename)
+                            image.greyscale().invert().contrast(1).posterize(2).write(filename)
 						);
 					})
 					.catch(err => {
@@ -83,6 +83,22 @@ module.exports = {
 					});
 			});
     	}
+
+        function saveImage(imageUrl, filename) {
+            log("Saving Image");
+            var Jimp = require('jimp');
+            return new Promise((resolve, reject) => {
+                Jimp.read(imageUrl)
+                    .then(image => {
+                        resolve(
+                            image.write(filename)
+                        );
+                    })
+                    .catch(err => {
+                        throw err;
+                    });
+            });
+        }
 
     	function sendToGoogleSheets(parsedText, alliance, stars, titan) {
     		log("Sending to Google");
@@ -159,8 +175,6 @@ module.exports = {
 				form.append('file', fs.createReadStream(path.join(__dirname + '/../', message.channel.name + '.jpg')));
 			});
 		}		
-  	
   	}
-
   },
 }
