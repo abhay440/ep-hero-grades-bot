@@ -74,8 +74,9 @@ module.exports = {
 				Jimp.read(imageUrl)
 					.then(image => {
 						resolve(
-							//image.quality(95).write(filename)
-                            image.greyscale().invert().contrast(1).posterize(2).write(filename)
+							image.quality(95).write(filename)
+                            //image.greyscale().invert().contrast(1).posterize(2).write(filename)
+                            //image.greyscale().write(filename) //2
 						);
 					})
 					.catch(err => {
