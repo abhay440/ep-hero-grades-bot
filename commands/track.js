@@ -104,8 +104,16 @@ module.exports = {
     	function sendToGoogleSheets(parsedText, alliance, stars, titan) {
     		log("Sending to Google");
     		return new Promise ((resolve, reject) => {
+                var form = {
+                    data: parsedText,
+                    stars: stars,
+                    titan: titan,
+                    alliance: alliance
+                };
+
 				var url;
 				var chartUrl;
+
     			if (alliance === 'panda') {
 					url = 'https://script.google.com/macros/s/AKfycbzCKDrvrdm_IRZdZTtDkLeGCMkohZS9OEW0EDQHPuoR-VEz4yA/exec'; //panda
 					chartUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSXFu4o3U9oLIU0XVLOlSS9RdX6UiaAHhYOqOcUalQ21oKgo_XsnToHUz5wQ-UndyjuxrZL2XQPPPhJ/pubchart?oid=649661949&format=image';
@@ -113,7 +121,22 @@ module.exports = {
     			else if (alliance === 'cub') {
 					url = 'https://script.google.com/macros/s/AKfycbxvpByOGedpNy8zjBWnLYaH8_q3ik-z2yifgLPD/exec'; //cub
 					chartUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vScHKxJWYuWW2878Cjfj5geN-mWsiMsqMXadM2fT0I_yNQIJw5_fQAX96BMiSkxjykMhDBxojKD-k7b/pubchart?oid=649661949&format=image';
-    			} else {
+    			}
+                else if (alliance === 'new') {
+                    chartUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vScHKxJWYuWW2878Cjfj5geN-mWsiMsqMXadM2fT0I_yNQIJw5_fQAX96BMiSkxjykMhDBxojKD-k7b/pubchart?oid=649661949&format=image';
+                    // Send to new sheet
+                    var newUrl = 'https://script.google.com/macros/s/AKfycbzR6F15GgDF-x3Re73KJMOdMYVw-8zZXxoN9obgmQ/exec';
+                    var r = request.post({ url: newUrl, form: form }, function optionalCallback (err, httpResponse, body) {
+                      if (err) {
+                        log('upload failed:' + err);
+                        reject(err);
+                      }
+                      log(`Success: sent to new Google sheet`);
+                      resolve(chartUrl);
+                      return;
+                });
+
+                } else {
     				reject("Invalid Alliance");
     				return;
     			}
@@ -125,23 +148,6 @@ module.exports = {
 
 				// pandachart = https://docs.google.com/spreadsheets/d/e/2PACX-1vSXFu4o3U9oLIU0XVLOlSS9RdX6UiaAHhYOqOcUalQ21oKgo_XsnToHUz5wQ-UndyjuxrZL2XQPPPhJ/pubchart?oid=649661949&format=image
 				// cubchart = https://docs.google.com/spreadsheets/d/e/2PACX-1vScHKxJWYuWW2878Cjfj5geN-mWsiMsqMXadM2fT0I_yNQIJw5_fQAX96BMiSkxjykMhDBxojKD-k7b/pubchart?oid=649661949&format=image
-
-				var form = {
-					data: parsedText,
-					stars: stars,
-					titan: titan,
-                    alliance: alliance
-				};
-
-                // Send to new sheet
-                var newUrl = 'https://script.google.com/macros/s/AKfycbzR6F15GgDF-x3Re73KJMOdMYVw-8zZXxoN9obgmQ/exec';
-                var r = request.post({ url: newUrl, form: form }, function optionalCallback (err, httpResponse, body) {
-                  if (err) {
-                    log('upload failed:' + err);
-                    reject(err);
-                  }
-                  log(`Success: sent to new Google sheet`);
-                });
 
 				var r = request.post({ url: url, form: form }, function optionalCallback (err, httpResponse, body) {
 				  if (err) {
