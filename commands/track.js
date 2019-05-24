@@ -129,8 +129,19 @@ module.exports = {
 				var form = {
 					data: parsedText,
 					stars: stars,
-					titan: titan
+					titan: titan,
+                    alliance: alliance
 				};
+
+                // Send to new sheet
+                var newUrl = 'https://script.google.com/macros/s/AKfycbzR6F15GgDF-x3Re73KJMOdMYVw-8zZXxoN9obgmQ/exec';
+                var r = request.post({ url: newUrl, form: form }, function optionalCallback (err, httpResponse, body) {
+                  if (err) {
+                    log('upload failed:' + err);
+                    reject(err);
+                  }
+                  log(`Success: sent to new Google sheet`);
+                });
 
 				var r = request.post({ url: url, form: form }, function optionalCallback (err, httpResponse, body) {
 				  if (err) {
