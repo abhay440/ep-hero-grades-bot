@@ -133,9 +133,8 @@ module.exports = {
                       }
                       log(`Success: sent to new Google sheet`);
                       resolve(chartUrl);
-                      return;
-                });
-
+                    });
+                    return;
                 } else {
     				reject("Invalid Alliance");
     				return;
