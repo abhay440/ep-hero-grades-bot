@@ -122,10 +122,10 @@ module.exports = {
 					url = 'https://script.google.com/macros/s/AKfycbxvpByOGedpNy8zjBWnLYaH8_q3ik-z2yifgLPD/exec'; //cub
 					chartUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vScHKxJWYuWW2878Cjfj5geN-mWsiMsqMXadM2fT0I_yNQIJw5_fQAX96BMiSkxjykMhDBxojKD-k7b/pubchart?oid=649661949&format=image';
     			}
-                else if (alliance === 'new') {
+                else if (alliance === 'knight') {
                     chartUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vScHKxJWYuWW2878Cjfj5geN-mWsiMsqMXadM2fT0I_yNQIJw5_fQAX96BMiSkxjykMhDBxojKD-k7b/pubchart?oid=649661949&format=image';
                     // Send to new sheet
-                    var newUrl = 'https://script.google.com/macros/s/AKfycbzR6F15GgDF-x3Re73KJMOdMYVw-8zZXxoN9obgmQ/exec';
+                    var newUrl = 'https://script.google.com/macros/s/AKfycbw_yKkDmU5AKesbJWIiZXxdy8AVRpNEQzr4ZngQd6PHlqJj0hBW/exec';
                     var r = request.post({ url: newUrl, form: form }, function optionalCallback (err, httpResponse, body) {
                       if (err) {
                         log('upload failed:' + err);
