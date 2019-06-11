@@ -123,7 +123,7 @@ module.exports = {
 					chartUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vScHKxJWYuWW2878Cjfj5geN-mWsiMsqMXadM2fT0I_yNQIJw5_fQAX96BMiSkxjykMhDBxojKD-k7b/pubchart?oid=649661949&format=image';
     			}
                 else if (alliance === 'knight') {
-                    chartUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vScHKxJWYuWW2878Cjfj5geN-mWsiMsqMXadM2fT0I_yNQIJw5_fQAX96BMiSkxjykMhDBxojKD-k7b/pubchart?oid=649661949&format=image';
+                    chartUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSHNzZzaP37muvIXpL4pHveTbTFFPsQfcciYJ3uSEBN2WrI0HR-C3vkYnrYCTwUh8NLJ7pww0BaLV6Z/pubchart?oid=581420534&format=image';
                     // Send to new sheet
                     var newUrl = 'https://script.google.com/macros/s/AKfycbw_yKkDmU5AKesbJWIiZXxdy8AVRpNEQzr4ZngQd6PHlqJj0hBW/exec';
                     var r = request.post({ url: newUrl, form: form }, function optionalCallback (err, httpResponse, body) {
