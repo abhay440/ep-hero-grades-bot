@@ -134,7 +134,7 @@ module.exports = {
                         log('upload failed:' + err);
                         reject(err);
                       }
-                      log(`Success: sent to new Google sheet`);
+                      log(`Success: sent to new Google sheet: ${body}`);
                       var jsonBody = JSON.parse(body);
                       chartUrl = jsonBody.chart.image
                       resolve(chartUrl);
