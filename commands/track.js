@@ -134,10 +134,10 @@ module.exports = {
                         log('upload failed:' + err);
                         reject(err);
                       }
-                      log(`Success: sent to new Google sheet: ${body}`);
+                      log(`Success: sent to new Google sheet`);
                       var jsonBody = JSON.parse(body);
-                      chartUrl = jsonBody.chart.image
-                      resolve(chartUrl);
+                      var imageBuffer = decodeBase64Image(jsonBody.chart.image);
+                      resolve(imageBuffer);
                     });
                     return;
                 } else {
