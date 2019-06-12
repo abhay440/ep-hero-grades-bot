@@ -137,7 +137,7 @@ module.exports = {
                       log(`Success: sent to new Google sheet`);
                       var jsonBody = JSON.parse(body);
                       var imageBuffer = decodeBase64Image(jsonBody.chart.image);
-                      resolve(imageBuffer);
+                      resolve(imageBuffer.data);
                     });
                     return;
                 } else {
