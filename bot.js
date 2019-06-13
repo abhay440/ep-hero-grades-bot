@@ -34,11 +34,10 @@ client.on('guildMemberAdd', member => {
 })
 
 client.on('message', message => {
-  log(`Received message: ${message}`)
   if (!message.content.startsWith(prefix)) {
-    log('Invalid content')
     return
   }
+  log(`Received message: ${message}`)
   const args = message.content.slice(prefix.length).split(/ +/)
   const commandName = args.shift().toLowerCase()
   const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
