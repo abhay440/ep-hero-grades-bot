@@ -46,20 +46,22 @@ module.exports = {
 			var parsedText = await ocr();
 			if (parsedText && parsedText !== false && parsedText.length > 0) {
 				//log(`OCR Result: ${parsedText}`);
-                var chartUrl = await sendToGoogleSheets(parsedText, alliance, stars, titan)
-                                        .catch(err => {
-                                            message.channel.send(`Error: ${err}`)
-                                        });
+                sendToGoogleSheets(parsedText, alliance, stars, titan)
+                    .then (chart => {
+                        message.channel.send("Summary", {
+                            files: [{
+                                attachment: chart,
+                                name: 'chart.png'
+                            }]
+                        });
+                    })
+                    .catch(err => {
+                        message.channel.send(`Error: ${err}`)
+                    });
 
                 //await saveImage(chartUrl, "chart.jpg");
                 //await sleep(2000)
 
-                message.channel.send("Summary", {
-                    files: [{
-                        attachment: chartUrl,
-                        name: 'chart.png'
-                    }]
-                });
 
 			} else {
 				return;
