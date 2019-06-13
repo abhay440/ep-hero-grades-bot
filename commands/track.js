@@ -46,8 +46,10 @@ module.exports = {
 			var parsedText = await ocr();
 			if (parsedText && parsedText !== false && parsedText.length > 0) {
 				//log(`OCR Result: ${parsedText}`);
-				var chartUrl = await sendToGoogleSheets(parsedText, alliance, stars, titan);
-				log("chartUrl: " + chartUrl);
+                var chartUrl = await sendToGoogleSheets(parsedText, alliance, stars, titan
+                                        .catch(err => {
+                                            message.channel.send(`Error: ${err}`)
+                                        });
 
                 //await saveImage(chartUrl, "chart.jpg");
                 //await sleep(2000)
