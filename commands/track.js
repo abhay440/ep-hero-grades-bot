@@ -45,7 +45,6 @@ module.exports = {
 
 			var parsedText = await ocr();
 			if (parsedText && parsedText !== false && parsedText.length > 0) {
-				//log(`OCR Result: ${parsedText}`);
                 sendToGoogleSheets(parsedText, alliance, stars, titan)
                     .then (chart => {
                         message.channel.send("Summary", {
@@ -58,11 +57,6 @@ module.exports = {
                     .catch(err => {
                         message.channel.send(`Error: ${err}`)
                     });
-
-                //await saveImage(chartUrl, "chart.jpg");
-                //await sleep(2000)
-
-
 			} else {
 				return;
 			}
@@ -119,7 +113,7 @@ module.exports = {
           };
 
           // Send to new sheet
-          var newUrl = 'https://script.google.com/macros/s/AKfycbw_yKkDmU5AKesbJWIiZXxdy8AVRpNEQzr4ZngQd6PHlqJj0hBW/exec';
+          var newUrl = process.env.TITANSHEET;
           var r = request.post({ url: newUrl, followAllRedirects: true, form: form }, function optionalCallback (err, httpResponse, body) {
             if (err) {
               log('upload failed:' + err);
@@ -172,12 +166,9 @@ module.exports = {
 				  	log('upload failed:' + err);
 					reject(err);
 				  }
-				  //log(`Success`);
 				  var jsonBody = JSON.parse(body);
-				  //log(`statusCode: ${jsonBody.IsErroredOnProcessing}`);
 				  if (jsonBody.IsErroredOnProcessing === false) {
 				  	var parsedText = jsonBody.ParsedResults[0].ParsedText;
-					//log(`Upload successful!  Server responded with: ${parsedText}`);
 					resolve(parsedText);
 				  }
 				  resolve(false);
