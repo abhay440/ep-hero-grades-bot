@@ -137,14 +137,17 @@ module.exports = {
                       if (err) {
                         log('upload failed:' + err);
                         reject(err);
+                        return;
                       }
                       log(`Success: sent to new Google sheet`);
                       var jsonBody = JSON.parse(body);
                       if (jsonBody.error === true) {
                         reject(jsonBody.errorMessage);
+                        return;
+                      } else {
+                        var imageBuffer = decodeBase64Image(jsonBody.chart.image);
+                        resolve(imageBuffer.data);
                       }
-                      var imageBuffer = decodeBase64Image(jsonBody.chart.image);
-                      resolve(imageBuffer.data);
                     });
                     return;
                 } else {
