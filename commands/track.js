@@ -140,7 +140,7 @@ module.exports = {
                       }
                       log(`Success: sent to new Google sheet`);
                       var jsonBody = JSON.parse(body);
-                      if (jsonBody.error == true) {
+                      if (jsonBody.error === true) {
                         reject(jsonBody.errorMessage);
                       }
                       var imageBuffer = decodeBase64Image(jsonBody.chart.image);
