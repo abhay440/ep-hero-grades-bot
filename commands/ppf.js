@@ -37,7 +37,6 @@ module.exports = {
     var projected = Math.round(ppf * 180);
 
     message.channel.send(`PPF: ${ppf}; Projected: ${projected}`)
-      .then(() => log(`Successfully sent reply for ${element} monsters`))
       .catch(error => console.error(error.message))
   }
 }
