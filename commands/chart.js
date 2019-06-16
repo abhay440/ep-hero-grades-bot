@@ -44,7 +44,7 @@ module.exports = {
                 var r = request.get({
                     url: newUrl,
                     followAllRedirects: true,
-                    qa: params
+                    qs: params
                 }, function optionalCallback(err, httpResponse, body) {
                     if (err) {
                         log('Request failed:' + err);
