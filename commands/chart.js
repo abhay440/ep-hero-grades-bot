@@ -41,7 +41,7 @@ module.exports = {
 
                 // Send to new sheet
                 var newUrl = process.env.TITANSHEET;
-                var r = request.post({
+                var r = request.get({
                     url: newUrl,
                     followAllRedirects: true,
                     qa: params
