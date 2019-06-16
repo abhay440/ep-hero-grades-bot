@@ -25,14 +25,14 @@ module.exports = {
     var points = args[2];
     var flagsLeft = args[3];
     
-    if (isNaN(half) || isNaN(players) || isNaN(ponts) || isNaN(flagsLeft)) {
+    if (isNaN(half) || isNaN(players) || isNaN(points) || isNaN(flagsLeft)) {
       message.reply("Invalid command. Sample command !ppf 1 30 1000 60");
     }
 
     flagsLeft = half == 1 ? flagsLeft + 90 : flagsLeft;
 
-    var ppf = points / ( (players*6) -  flagsLeft);
-    var projected = ppf * 180;
+    var ppf = Math.round(points / ( (players*6) -  flagsLeft) * 10) / 10;
+    var projected = Math.round(ppf * 180);
 
     message.channel.send(`PPF: ${ppf}; Projected: ${projected}`)
       .then(() => log(`Successfully sent reply for ${element} monsters`))
