@@ -29,9 +29,11 @@ module.exports = {
       message.reply("Invalid command. Sample command !ppf 1 30 1000 60");
     }
 
-    flagsLeft = half == 1 ? flagsLeft + 90 : flagsLeft;
+    var totalFlags = players * 6;
 
-    var ppf = Math.round(points / ( (players*6) -  flagsLeft) * 100) / 100;
+    flagsLeft = (half == 1) ? flagsLeft + totalFlags/2 : flagsLeft;
+
+    var ppf = Math.round( points / ( totalFlags -  flagsLeft ) * 100 ) / 100;
     var projected = Math.round(ppf * 180);
 
     message.channel.send(`PPF: ${ppf}; Projected: ${projected}`)
