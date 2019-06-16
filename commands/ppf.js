@@ -33,6 +33,8 @@ module.exports = {
 
     flagsLeft = (half == 1) ? flagsLeft + (totalFlags/2) : flagsLeft;
 
+    log(`totalFlags: ${totalFlags}; flagsLeft: ${flagsLeft}; half: ${half}`);
+
     var ppf = Math.round( points / ( totalFlags -  flagsLeft ) * 100 ) / 100;
     var projected = Math.round(ppf * 180);
 
