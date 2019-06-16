@@ -31,7 +31,7 @@ module.exports = {
 
     flagsLeft = half == 1 ? flagsLeft + 90 : flagsLeft;
 
-    var ppf = Math.round(points / ( (players*6) -  flagsLeft) * 10) / 10;
+    var ppf = Math.round(points / ( (players*6) -  flagsLeft) * 100) / 100;
     var projected = Math.round(ppf * 180);
 
     message.channel.send(`PPF: ${ppf}; Projected: ${projected}`)
