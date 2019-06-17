@@ -2,10 +2,15 @@ const {log} = require('../Utils');
 
 const data = {
   fire: 'S2:3-4, S2:3:8, 20-4, 19-6, 19-4, 11-6, 6-8',
+  red: 'S2:3-4, S2:3:8, 20-4, 19-6, 19-4, 11-6, 6-8',
   ice: '8-7',
+  blue: '8-7',
   nature: '7-5',
+  green: '7-5',
   holy: '10-6, 12-9',
-  dark: '7-4'
+  yellow: '10-6, 12-9',
+  dark: '7-4',
+  purple: '7-4'
 }
 
 module.exports = {
