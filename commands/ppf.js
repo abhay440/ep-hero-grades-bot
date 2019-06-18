@@ -24,11 +24,20 @@ module.exports = {
     var players = args[1];
     var points = args[2];
     var flagsLeft = args[3];
-    
+
     if (isNaN(half) || isNaN(players) || isNaN(points) || isNaN(flagsLeft)) {
       message.reply("Invalid command. Sample command !ppf 1 30 1000 60");
     }
 
+    var ppf = getPPF(half, players, points, flagsLeft)
+    var projected = Math.round(ppf * 180);
+
+    message.channel.send(`PPF: ${ppf}; Projected: ${projected}`)
+      .catch(error => console.error(error.message))
+  }
+}
+
+function getPPF(half, players, points, flagsLeft) {
     var totalFlags = players * 6;
 
     flagsLeft = (half == 1) ? (+flagsLeft + (totalFlags/2)) : flagsLeft;
@@ -36,9 +45,6 @@ module.exports = {
     log(`totalFlags: ${totalFlags}; flagsLeft: ${flagsLeft}; half: ${half}`);
 
     var ppf = Math.round( points / ( totalFlags -  flagsLeft ) * 100 ) / 100;
-    var projected = Math.round(ppf * 180);
 
-    message.channel.send(`PPF: ${ppf}; Projected: ${projected}`)
-      .catch(error => console.error(error.message))
-  }
+    return ppf;
 }
