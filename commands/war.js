@@ -28,10 +28,17 @@ module.exports = {
 
         if (message.attachments.size > 0) {
 
-            trackData(message);
+            trackData(message, 0);
 
-            async function trackData(message) {
-                await compressImage(message.attachments.first().url, message.channel.name + '.jpg');
+            async function trackData(message, index) {
+                if(typeof message.attachments[index] === 'undefined') {
+                    message.channel.send("Done");
+                    return;
+                }
+
+                log("Processing attachment: " + index);
+
+                await compressImage(message.attachments[index].url, message.channel.name + '.jpg');
                 log("Compressed");
                 await sleep(1000)
                 log("Processing");
@@ -40,13 +47,14 @@ module.exports = {
                 if (parsedText && parsedText !== false && parsedText.length > 0) {
                     sendToGoogleSheets(parsedText, alliance, opponent, date)
                         .then(result => {
-                            message.channel.send(result)
+                            //message.channel.send(result)
+                            trackData(message, index+1);
                         })
                         .catch(err => {
-                            message.channel.send(`Error: ${err}`)
+                            trackData(message, index+1);
                         });
                 } else {
-                    return;
+                    trackData(message, index+1);
                 } 
             }
 
