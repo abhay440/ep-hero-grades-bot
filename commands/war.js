@@ -34,7 +34,7 @@ module.exports = {
                 var key = Array.from(message.attachments.keys())[index];
                 var attachment = message.attachments.get(key);
 
-                if (attachment === 'undefined') {
+                if (attachment === 'undefined' || attachment == null) {
                     message.channel.send("Done");
                     return;
                 }
