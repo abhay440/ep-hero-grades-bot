@@ -31,14 +31,16 @@ module.exports = {
             trackData(message, 0);
 
             async function trackData(message, index) {
-                if(typeof message.attachments.array()[index] === 'undefined') {
+                var key = Array.from(message.attachments.keys())[index];
+                if (key === 'undefined') {
                     message.channel.send("Done");
                     return;
                 }
+                var attachment = message.attachments.get(key);
 
                 log("Processing attachment: " + index);
 
-                await compressImage(message.attachments[index].url, message.channel.name + '.jpg');
+                await compressImage(attachment.url, message.channel.name + '.jpg');
                 log("Compressed");
                 await sleep(1000)
                 log("Processing");
