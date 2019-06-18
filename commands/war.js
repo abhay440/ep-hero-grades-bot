@@ -31,7 +31,7 @@ module.exports = {
             trackData(message, 0);
 
             async function trackData(message, index) {
-                if(typeof message.attachments[index] === 'undefined') {
+                if(typeof message.attachments.array()[index] === 'undefined') {
                     message.channel.send("Done");
                     return;
                 }
