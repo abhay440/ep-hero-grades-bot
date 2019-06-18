@@ -32,11 +32,12 @@ module.exports = {
 
             async function trackData(message, index) {
                 var key = Array.from(message.attachments.keys())[index];
-                if (key === 'undefined') {
+                var attachment = message.attachments.get(key);
+
+                if (attachment === 'undefined') {
                     message.channel.send("Done");
                     return;
                 }
-                var attachment = message.attachments.get(key);
 
                 log("Processing attachment: " + index);
 
