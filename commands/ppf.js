@@ -16,7 +16,7 @@ module.exports = {
 
     if (args.length != 4) {
       log("Invalid Arguments: " + args.length);
-      message.reply("Invalid command. Sample command !ppf 1 30 1000 60");
+      message.reply("Invalid command. Usage: !ppf [1 if first half; 2 if second half] [PLAYERS] [POINTS] [FLAGS LEFT]. Sample: !ppf 1 30 1000 60");
       return;
     }
 
