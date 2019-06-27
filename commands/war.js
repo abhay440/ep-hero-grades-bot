@@ -28,14 +28,18 @@ module.exports = {
 
         if (message.attachments.size > 0) {
 
-            trackData(message, 0);
+            trackData(message, 0, "");
 
-            async function trackData(message, index) {
+            async function trackData(message, index, errors) {
                 var key = Array.from(message.attachments.keys())[index];
                 var attachment = message.attachments.get(key);
 
                 if (attachment === 'undefined' || attachment == null) {
-                    message.channel.send("Done");
+                    if (errors.length > 0) {
+                        message.channel.send("Errors: " + errors);
+                        return;
+                    }
+                    message.channel.send("Done.");
                     return;
                 }
 
@@ -51,13 +55,18 @@ module.exports = {
                     sendToGoogleSheets(parsedText, alliance, opponent, date)
                         .then(result => {
                             //message.channel.send(result)
-                            trackData(message, index+1);
+                            trackData(message, index+1, errors);
                         })
                         .catch(err => {
-                            trackData(message, index+1);
+                            if (errors.length > 0) {
+                                errors += " | " + err;
+                            } else {
+                                errors = err;
+                            }
+                            trackData(message, index+1, errors);
                         });
                 } else {
-                    trackData(message, index+1);
+                    trackData(message, index+1, errors);
                 } 
             }
 
