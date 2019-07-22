@@ -182,6 +182,7 @@ module.exports = {
                         var jsonBody = JSON.parse(body);
                         if (jsonBody.IsErroredOnProcessing === false) {
                             var parsedText = jsonBody.ParsedResults[0].ParsedText;
+                            log("Scanned text size: " + parsedText.length);
                             resolve(parsedText);
                         }
                         resolve(false);
