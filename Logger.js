@@ -8,7 +8,7 @@ const info = function (message, data) {
 **Stars**: ${data.stars}
 **Limited Availability?**: ${data.limited}
 **Class**: ${data.class}
-**Atlantis Family**: ${family}
+**Family**: ${family}
 
 **Attack**: ${data.attack}  |  **Defense**: ${data.defense}  |  **Health**: ${data.health}
 **Mana Speed:** ${data.mana}
