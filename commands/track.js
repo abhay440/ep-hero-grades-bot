@@ -16,6 +16,7 @@ module.exports = {
     var alliance = args[0];
     var stars = args[1];
     var titan = args[2].toLowerCase();
+    var pandaDashboard = 'https://docs.google.com/spreadsheets/d/1fu2kTTt8LC-2LCqT7VksIDNK9Fs-HIY5Ai_jdUJBNfQ/htmlembed/sheet?gid=2108539798&range=A36:A80';
 
     if (isNaN(stars) || stars < 0 || stars > 14) {
       log("Invalid stars: " + stars);
@@ -44,20 +45,45 @@ module.exports = {
         log("Processing");
 
         var parsedText = await ocr();
+        log('parsed');
         if (parsedText && parsedText !== false && parsedText.length > 0) {
+          log('sending to google');
           sendToGoogleSheets(parsedText, alliance, stars, titan)
           .then (chart => {
-            message.channel.send("Summary", {
-              files: [{
-                attachment: chart,
-                name: 'chart.png'
-              }]
-            });
+
+            if (alliance === 'panda') {
+
+              const puppeteer = require('puppeteer');
+
+              (async () => {
+                const browser = await puppeteer.launch();
+                const page = await browser.newPage();
+                await page.setViewport({
+                  width: 1128,
+                  height: 1020,
+                  deviceScaleFactor: 1,
+                });
+                await page.goto(pandaDashboard, {waitUntil: 'networkidle2'});
+                await page.screenshot({path: 'Dashboard.png'});
+                await browser.close();
+                message.channel.send("Dashboard", {files: ['./Dashboard.png']});
+              })();
+
+            } else {
+              message.channel.send("Summary", {
+                files: [{
+                  attachment: chart,
+                  name: 'chart.png'
+                }]
+              });
+            }
+
           })
           .catch(err => {
             message.channel.send(`Error: ${err}`)
           });
         } else {
+          log('No respose from OCR');
           return;
         }
       }
@@ -158,7 +184,6 @@ module.exports = {
             'apikey': process.env.OCRSPACEAPI,
             'Content-Type': 'application/x-www-form-urlencoded'
           };
-
           var r = request.post({ url: url, headers: headers }, function optionalCallback (err, httpResponse, body) {
             if (err) {
               log('upload failed:' + err);
