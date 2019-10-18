@@ -3,7 +3,7 @@ const request = require('request');
 
 module.exports = {
   name: 'track',
-  description: 'Track Titan/AW scores',
+  description: 'Track Titan scores',
   args: true,
   execute(message, args) {
 
