@@ -44,9 +44,8 @@ module.exports = {
         log("Processing");
 
         var parsedText = await ocr();
-        log('parsed');
+        // log('parsedText: ' + JSON.stringify(parsedText));
         if (parsedText && parsedText !== false && parsedText.length > 0) {
-          log('sending to google');
           sendToGoogleSheets(parsedText, alliance, stars, titan)
           .then (dashboardUrl => {
             const puppeteer = require('puppeteer');
@@ -132,6 +131,7 @@ module.exports = {
             }
             log(`Success: sent to new Google sheet`);
             var jsonBody = JSON.parse(body);
+            log("Google Response: " + JSON.stringify(jsonBody));
             if (jsonBody.error === true) {
               reject(jsonBody.errorMessage);
               return;
