@@ -19,17 +19,26 @@ module.exports = {
         var chartType = args[1];
 
         getChart(alliance, chartType)
-            .then(chart => {
-                message.channel.send("Summary", {
-                    files: [{
-                        attachment: chart,
-                        name: 'chart.png'
-                    }]
-                });
-            })
-            .catch(err => {
-                message.channel.send(`Error: ${err}`)
-            });
+        .then(dashboardUrl => {
+            const puppeteer = require('puppeteer');
+            (async () => {
+              const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});;
+              const page = await browser.newPage();
+              await page.setViewport({
+                width: 1128,
+                height: 1020,
+                deviceScaleFactor: 1,
+              });
+              await page.goto(dashboardUrl, {waitUntil: 'networkidle2'});
+              var dashboardFileName = alliance + 'Dashboard.png';
+              await page.screenshot({path: dashboardFileName});
+              await browser.close();
+              message.channel.send("Dashboard", {files: ['./' + dashboardFileName]});
+            })();
+        })
+        .catch(err => {
+            message.channel.send(`Error: ${err}`)
+        });
 
         function getChart(alliance, chartType) {
             log("Sending to Google");
