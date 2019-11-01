@@ -66,6 +66,7 @@ module.exports = {
                             trackData(message, index+1, errors);
                         });
                 } else {
+                    log('No respose from OCR');
                     trackData(message, index+1, errors);
                 } 
             }
