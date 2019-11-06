@@ -118,7 +118,8 @@ module.exports = {
                         data: parsedText,
                         opponent: opponent,
                         date: date,
-                        alliance: alliance
+                        alliance: alliance,
+                        timestamp: new Date().getTime()
                     };
 
                     // Send to new sheet
