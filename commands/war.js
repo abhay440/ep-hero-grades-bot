@@ -19,6 +19,7 @@ module.exports = {
         var alliance = args[0];
         var opponent = args[1];
         var date = args[2];
+        var timestamp = message.timestamp;
 
         log("Received attachments: " + message.attachments.size);
         if (message.attachments.size == 0) {
@@ -50,9 +51,18 @@ module.exports = {
                 await sleep(1000)
                 log("Processing");
 
-                var parsedText = await ocr();
+                var parsedText;
+                for (var i = 0; i < 3; i++) {
+                    parsedText = await ocr();
+                    log ("parsedText " + parsedText);
+                    if (parsedText !== false) {
+                        break;
+                    }
+                    sleep(2000);
+                }
+
                 if (parsedText && parsedText !== false && parsedText.length > 0) {
-                    sendToGoogleSheets(parsedText, alliance, opponent, date)
+                    sendToGoogleSheets(parsedText, alliance, opponent, date, timestamp)
                         .then(result => {
                             //message.channel.send(result)
                             trackData(message, index+1, errors);
@@ -111,7 +121,7 @@ module.exports = {
                 });
             }
 
-            function sendToGoogleSheets(parsedText, alliance, opponent, date) {
+            function sendToGoogleSheets(parsedText, alliance, opponent, date, timestamp) {
                 log("Sending to Google");
                 return new Promise((resolve, reject) => {
                     var form = {
@@ -119,7 +129,7 @@ module.exports = {
                         opponent: opponent,
                         date: date,
                         alliance: alliance,
-                        timestamp: new Date().getTime()
+                        timestamp: timestamp
                     };
 
                     // Send to new sheet
@@ -179,7 +189,8 @@ module.exports = {
                     }, function optionalCallback(err, httpResponse, body) {
                         if (err) {
                             log('upload failed:' + err);
-                            reject(err);
+                            resolve(false);
+                            return;
                         }
                         var jsonBody = JSON.parse(body);
                         if (jsonBody.IsErroredOnProcessing === false) {
