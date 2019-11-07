@@ -19,7 +19,7 @@ module.exports = {
         var alliance = args[0];
         var opponent = args[1];
         var date = args[2];
-        var timestamp = message.timestamp;
+        var timestamp = message.createdTimestamp;
 
         log("Received attachments: " + message.attachments.size);
         if (message.attachments.size == 0) {
