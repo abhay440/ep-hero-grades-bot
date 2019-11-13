@@ -58,7 +58,7 @@ module.exports = {
                     if (parsedText !== false) {
                         break;
                     }
-                    sleep(2000);
+                    await sleep(3000);
                 }
 
                 if (parsedText && parsedText !== false && parsedText.length > 0) {
