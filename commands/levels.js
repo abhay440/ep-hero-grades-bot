@@ -30,19 +30,35 @@ const data = {
   troops: 'https://i.imgur.com/awcdtg1.png'
 }
 
+const events = {
+  'wonderland': 'https://i.imgur.com/YFkmaZ3.png (Mariamne)',
+  'riddles of wonderland': 'https://i.imgur.com/YFkmaZ3.png (Mariamne)',
+  'riddles': 'https://i.imgur.com/YFkmaZ3.png (Mariamne)',
+  'knights': 'https://i.imgur.com/gu8LyAx.png (Mariamne)',
+  'knights of avalon': 'https://i.imgur.com/gu8LyAx.png (Mariamne)',
+  'avalon': 'https://i.imgur.com/gu8LyAx.png (Mariamne)',
+  'pirates': 'https://i.imgur.com/anrcuFc.png (Mariamne)',
+  'pirates of corellia': 'https://i.imgur.com/anrcuFc.png (Mariamne)',
+  'corellia': 'https://i.imgur.com/anrcuFc.png (Mariamne)'
+}
+
 module.exports = {
   name: 'levels',
+  aliases:['event'],
   description: 'Get best levels for filling elemental chests',
   args: true,
   execute(message, args) {
     if (args.length) {
       const name = getHeroName(args)
       let element = name.toUpperCase();
-      let levels = data[name.toLowerCase()];
-      message.channel.send(`Best level(s) for ${element}: ${levels}`)
-        .then(() => log(`Successfully sent reply for ${element}`))
-        .catch(error => console.error(error.message))
-  }
+
+      let image = events[name.toLowerCase()];
+      if (undefined !== image) {
+        message.channel.send(`${image}`);
+      } else {
+        let levels = data[name.toLowerCase()];
+        message.channel.send(`Best level(s) for ${element}: ${levels}`);
+      }
     }
-    
+  }
 }
