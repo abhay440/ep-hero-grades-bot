@@ -36,12 +36,7 @@ module.exports = {
                 var attachment = message.attachments.get(key);
 
                 if (attachment === 'undefined' || attachment == null) {
-                    if (errors.length > 0) {
-                        message.channel.send("Errors: " + errors);
-                        return;
-                    }
-                    log("Processed attachment: " + attachment.filename);
-                    message.channel.send("Done: " + attachment.filename);
+                    message.channel.send("Errors: No attachment");
                     return;
                 }
 
@@ -64,21 +59,19 @@ module.exports = {
 
                 if (parsedText && parsedText !== false && parsedText.length > 0) {
                     sendToGoogleSheets(parsedText, alliance, opponent, date, timestamp)
-                        .then(result => {
-                            //message.channel.send(result)
-                            trackData(message, index+1, errors);
-                        })
                         .catch(err => {
-                            if (errors.length > 0) {
-                                errors += " | " + err;
-                            } else {
-                                errors = err;
-                            }
-                            trackData(message, index+1, errors);
+                            errors = err;
                         });
                 } else {
                     log('No respose from OCR');
-                    trackData(message, index+1, "OCR error - " + attachment.filename);
+                    errors = "OCR error";
+                }
+
+                log("Processed attachment: " + attachment.filename);
+                if (errors.length > 0) {
+                    message.channel.send("Done: " + attachment.filename + " Error: " + errors);
+                } else {
+                    message.channel.send("Done: " + attachment.filename);
                 }
             }
 
