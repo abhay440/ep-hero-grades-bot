@@ -40,11 +40,12 @@ module.exports = {
                         message.channel.send("Errors: " + errors);
                         return;
                     }
-                    message.channel.send("Done.");
+                    log("Processed attachment: " + attachment.filename);
+                    message.channel.send("Done: " + attachment.filename);
                     return;
                 }
 
-                log("Processing attachment: " + index);
+                log("Processing attachment: " + attachment.filename);
 
                 await compressImage(attachment.url, message.channel.name + '.jpg');
                 log("Compressed");
@@ -54,11 +55,11 @@ module.exports = {
                 var parsedText;
                 for (var i = 0; i < 3; i++) {
                     parsedText = await ocr();
-                    log ("parsedText " + parsedText);
+                    // log ("parsedText " + parsedText);
                     if (parsedText !== false) {
                         break;
                     }
-                    await sleep(3000);
+                    await sleep(5000);
                 }
 
                 if (parsedText && parsedText !== false && parsedText.length > 0) {
@@ -77,8 +78,8 @@ module.exports = {
                         });
                 } else {
                     log('No respose from OCR');
-                    trackData(message, index+1, errors);
-                } 
+                    trackData(message, index+1, "OCR error - " + attachment.filename);
+                }
             }
 
             function sleep(ms) {
@@ -140,7 +141,7 @@ module.exports = {
                         form: form
                     }, function optionalCallback(err, httpResponse, body) {
                         if (err) {
-                            log('upload failed:' + err);
+                            log('Google upload failed: ' + err);
                             reject(err);
                             return;
                         }
@@ -188,7 +189,7 @@ module.exports = {
                         headers: headers
                     }, function optionalCallback(err, httpResponse, body) {
                         if (err) {
-                            log('upload failed:' + err);
+                            log('OCR upload failed: ' + err);
                             resolve(false);
                             return;
                         }
