@@ -3,7 +3,7 @@ const request = require('request');
 
 module.exports = {
   name: 'track',
-  description: 'Track Titan scores',
+  description: 'Track Titan scores. Usage: !track panda 12 nature',
   args: true,
   execute(message, args) {
 

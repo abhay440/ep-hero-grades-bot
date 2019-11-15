@@ -147,7 +147,12 @@ module.exports = {
   'Legendary Wonderland': [
     'Alice',
     'Hatter',
-    'Queen of Hearts'
+    'Queen of Hearts',
+    'White Rabbit',
+    'Jabberwock'
+  ],
+  'Rare Wonderland': [
+    'Shrubbear'
   ]
 }
 

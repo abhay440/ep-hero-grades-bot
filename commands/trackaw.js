@@ -3,7 +3,7 @@ const request = require('request');
 
 module.exports = {
   name: 'trackaw',
-  description: 'Track AW scores',
+  description: 'Track AW scores. Usage: !trackaw panda 7000 7dd 6000 arrows',
   args: true,
   execute(message, args) {
 

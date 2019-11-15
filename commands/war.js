@@ -6,7 +6,7 @@ const request = require('request');
 module.exports = {
     name: 'war',
     aliases:['aw'],
-    description: 'Track AW scores',
+    description: 'Track AW hits. Usage: !war panda OPPONENT DATE',
     args: true,
     execute(message, args) {
 

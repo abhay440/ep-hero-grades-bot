@@ -6,7 +6,6 @@ const puppeteer = require('puppeteer');
 
 module.exports = {
     name: 'chart',
-    aliases:['ct'],
     description: 'Charts',
     args: true,
     execute(message, args) {

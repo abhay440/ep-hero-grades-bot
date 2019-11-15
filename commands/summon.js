@@ -10,7 +10,7 @@ const pullType = {
   PIRATES: ['Legendary', 'Epic', 'Rare', 'Epic Pirates', 'Legendary Pirates'],
   AVALON: ['Legendary', 'Epic', 'Rare', 'Epic Avalon', 'Legendary Avalon'],
   GUARDIANS: ['Legendary', 'Epic', 'Rare', 'Epic Guardians', 'Legendary Guardians'],
-  WONDERLAND: ['Legendary', 'Epic', 'Rare', 'Epic Wonderland', 'Legendary Wonderland']
+  WONDERLAND: ['Legendary', 'Epic', 'Rare', 'Epic Wonderland', 'Legendary Wonderland', 'Rare Wonderland']
 }
 
 const appearanceRates = {
@@ -20,7 +20,7 @@ const appearanceRates = {
   PIRATES: [1.5, 20.8, 71, 5.7, 1],
   AVALON: [1.5, 20.8, 71, 5.7, 1],
   GUARDIANS: [1.5, 20.8, 71, 5.7, 1],
-  WONDERLAND: [1.5, 20.8, 71, 5.7, 1]
+  WONDERLAND: [1.5, 20.8, 63.1, 5.7, 1, 7.9]
 }
 
 const events = {
