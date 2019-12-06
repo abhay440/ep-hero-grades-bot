@@ -185,6 +185,8 @@ module.exports = {
 
           var form = r.form();
           form.append('isTable', 'true');
+          form.append('scale', 'true');
+          form.append('OCREngine', '2');
 
           form.append('file', fs.createReadStream(path.join(__dirname + '/../', message.channel.name + '.jpg')));
         });
